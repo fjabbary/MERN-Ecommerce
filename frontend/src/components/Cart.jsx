@@ -1,7 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import BackLink from "./BackLink";
 import { useEffect } from "react";
-import { closeCartDropdown } from "../features/cartSlice";
+import {
+  closeCartDropdown,
+  clearCart,
+  removeCartItem,
+} from "../features/cartSlice";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -10,6 +14,16 @@ const Cart = () => {
   useEffect(() => {
     dispatch(closeCartDropdown());
   }, [dispatch]);
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  const handleRemoveCartItem = (item) => {
+    if (window.confirm(`Are you sure you want to remove ${item.name}?`)) {
+      dispatch(removeCartItem(item));
+    }
+  };
 
   return (
     <div className="cart-container">
@@ -42,7 +56,12 @@ const Cart = () => {
                   <div className="details">
                     <p className="title">{cartItem.name}</p>
                     <p>{cartItem.desc}</p>
-                    <button className="btn-remove">Remove</button>
+                    <button
+                      className="btn-remove"
+                      onClick={() => handleRemoveCartItem(cartItem)}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
                 <div className="cart-price">${cartItem.price}</div>
@@ -60,7 +79,7 @@ const Cart = () => {
 
           <div className="row">
             <div className="clear-btn">
-              <button>Clear Cart</button>
+              <button onClick={handleClearCart}>Clear Cart</button>
             </div>
 
             <div className="subtotal-container">

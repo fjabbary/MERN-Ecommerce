@@ -35,6 +35,28 @@ const cartSlice = createSlice({
 
     closeCartDropdown(state, action) {
       state.isCartOpen = false;
+    },
+
+    clearCart(state, action) {
+      state.cartItems = [];
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+      toast.error(`All items in the cart cleared!`, {
+        position: "bottom-left"
+      })
+    },
+
+    removeCartItem(state, action) {
+      const { id, name } = action.payload;
+      const foundIndex = state.cartItems.findIndex((item) => item.id === id);
+      state.cartItems.splice(foundIndex, 1);
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      toast.error(`${name} removed from the cart`, {
+        position: "bottom-left"
+      })
+    },
+
+    changeCartItemQuantity(state, action) {
+
     }
 
 
@@ -45,5 +67,5 @@ const cartSlice = createSlice({
 
 
 
-export const { addToCart, toggleCartDropdown, closeCartDropdown } = cartSlice.actions;
+export const { addToCart, toggleCartDropdown, closeCartDropdown, clearCart, removeCartItem } = cartSlice.actions;
 export default cartSlice.reducer;
