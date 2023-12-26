@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
+import DropDown from "./DropDown";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleCartDropdown } from "../features/cartSlice";
 
 const Navbar = () => {
-  return (
-    <div className="nav-bar">
-      <Link to="/">
-        <h2>Online Shop</h2>
-      </Link>
+  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const dispatch = useDispatch();
 
-      <Link to="/cart">
-        <div className="nav-bag">
+  const handleToggle = () => {
+    dispatch(toggleCartDropdown());
+  };
+
+  return (
+    <div className="navbar-container">
+      <div className="nav-bar">
+        <Link to="/">
+          <h2>Online Shop</h2>
+        </Link>
+
+        <div className="nav-bag" onClick={handleToggle}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="28"
@@ -24,7 +34,9 @@ const Navbar = () => {
             <span>3</span>
           </span>
         </div>
-      </Link>
+      </div>
+
+      {isCartOpen && <DropDown />}
     </div>
   );
 };
