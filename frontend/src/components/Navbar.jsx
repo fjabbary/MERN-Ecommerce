@@ -2,14 +2,22 @@ import { Link } from "react-router-dom";
 import DropDown from "./DropDown";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCartDropdown } from "../features/cartSlice";
+import { useEffect } from "react";
+import { calcCartTotalQuantity } from "../features/cartSlice";
 
 const Navbar = () => {
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const cartTotalQty = useSelector((state) => state.cart.cartTotalQty);
+
   const dispatch = useDispatch();
 
   const handleToggle = () => {
     dispatch(toggleCartDropdown());
   };
+
+  useEffect(() => {
+    dispatch(calcCartTotalQuantity());
+  }, [dispatch]);
 
   return (
     <div className="navbar-container">
@@ -31,7 +39,7 @@ const Navbar = () => {
           </svg>
 
           <span className="bag-quantity">
-            <span>3</span>
+            <span>{cartTotalQty}</span>
           </span>
         </div>
       </div>

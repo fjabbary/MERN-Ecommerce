@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAllProductsQuery } from "../features/productsApi";
-import { addToCart } from "../features/cartSlice";
+import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
@@ -9,6 +9,7 @@ const Home = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    dispatch(calcCartTotalQuantity());
   };
 
   return (

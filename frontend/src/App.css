@@ -41,13 +41,14 @@ body {
 
 .bag-quantity span {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   background: yellow;
   border-radius: 100%;
   color: var(--purple);
   text-align: center;
   font-weight: bold;
+  line-height: 25px;
 }
 
 /* Not Found */
@@ -205,6 +206,13 @@ body {
   cursor: pointer;
   background: #eee;
   border: 1px solid #aaa;
+  background: none;
+  border: 1px solid #000;
+  font-weight: bold;
+}
+
+.cart-qty button:hover {
+  background: #eee;
 }
 
 .cart-qty span {
