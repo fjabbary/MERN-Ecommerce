@@ -51,6 +51,15 @@ body {
   line-height: 25px;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right a {
+  margin-right: 40px;
+}
+
 /* Not Found */
 .not-found {
   display: flex;
@@ -295,4 +304,85 @@ body {
 .no-cart-item {
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* Category  */
+
+.categories-container {
+  margin: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 80%;
+  justify-content: space-between;
+}
+
+.category-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 40px;
+  border: 4px solid #000;
+  overflow: hidden;
+}
+
+.category-card img {
+  height: 100%;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-title {
+  background-color: #fff;
+  padding: 20px 60px;
+  color: #000;
+  font-weight: bold;
+  border: 2px solid #000;
+  opacity: 0.7;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  z-index: 100;
+  transform: translate(-50%, 50%);
+}
+
+/* Shop now */
+.all-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.product-header {
+  background-color: #eee;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.all-categories-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.product-card {
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  margin: 20px;
+}
+
+.btn.btn-details {
+  margin: 20px;
+  width: 100%;
+  height: 40px;
+  background-color: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

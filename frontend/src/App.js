@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import NotFound from './components/NotFound';
+import ShopNow from './components/ShopNow';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/shop-now" element={<ShopNow />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
