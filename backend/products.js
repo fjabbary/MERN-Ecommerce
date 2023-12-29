@@ -7,6 +7,7 @@ const products = [
         name: 'Brown Brim',
         features: ['Costume cowboy hat with faux suede finish', 'Available in several colors for a variety of looks', 'One size fits most adults', 'Additional accessories and costume pieces sold separately', 'Made by Forum Novelties, a leader in costumes and novelty products for more than 30 years'],
         imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
+        images: ['https://i.ibb.co/ZYW3VTp/brown-brim.png', 'http://americanhatmakers.com/cdn/shop/products/cattleman-brown-felt-western-cowboy-hat-americanhatmakers-_3.jpg?v=1690501253', 'https://cdn.sanity.io/images/v8kybopt/production/69f83e09acea097f5d3579ee3fee45819a8d38b6-2000x2000.png?w=600&fit=max&auto=format'],
         price: 25,
       },
       {

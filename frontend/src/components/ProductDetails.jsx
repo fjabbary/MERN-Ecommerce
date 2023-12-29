@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { productFetch } from "../features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
+import Slideshow from "./SlideShow";
 
 const ProductDetails = () => {
   const { category, id } = useParams();
@@ -28,7 +29,7 @@ const ProductDetails = () => {
 
       <div className="desc">
         <div className="left">
-          <img src={selectedProduct.imageUrl} alt={selectedProduct.name} />
+          <Slideshow slideImages={selectedProduct.images} />
         </div>
         <div className="middle">
           <h3>{selectedProduct.name}</h3>
