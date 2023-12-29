@@ -120,7 +120,8 @@ body {
   justify-content: space-between;
 }
 
-.product button {
+.product button,
+.add-to-cart {
   width: 100%;
   height: 40px;
   background-color: var(--purple);
@@ -207,6 +208,7 @@ body {
 
 .cart-desc .details {
   text-align: left;
+  padding-left: 10px;
 }
 
 .cart-qty button {
@@ -351,7 +353,7 @@ body {
 .all-categories {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 .product-header {
   background-color: #eee;
@@ -370,6 +372,10 @@ body {
   margin: 0 auto;
 }
 
+.all-categories-container a {
+  text-decoration: none;
+}
+
 .product-card {
   margin: 0 10px;
   border: 1px solid #ccc;
@@ -378,11 +384,70 @@ body {
 
 .btn.btn-details {
   margin: 20px;
-  width: 100%;
+  width: 80%;
   height: 40px;
+  display: flex;
   background-color: var(--purple);
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.breadcrumb {
+  color: #0000ee;
+  font-size: 14px;
+  margin: 40px 0;
+}
+
+.breadcrumb a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.one-product {
+  margin: 40px auto;
+  width: 80%;
+}
+
+.desc {
+  display: flex;
+}
+
+.desc .left {
+  width: 50%;
+}
+
+.desc .middle {
+  padding: 0 60px;
+  width: 50%;
+}
+
+.desc .middle h3 {
+  margin-bottom: 15px;
+}
+
+.desc .middle p {
+  padding-bottom: 10px;
+}
+
+.desc .middle ul {
+  list-style: square;
+  list-style-position: inside;
+  line-height: 26px;
+  margin-bottom: 60px;
+}
+
+.desc .right {
+  width: 20%;
 }

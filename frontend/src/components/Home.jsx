@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const { categories } = useSelector((state) => state.categories);
-  console.log(categories);
 
   return (
     <Link to="/shop-now">
       <div className="categories-container">
-        {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
+        {categories.map((category, idx) => (
+          <CategoryCard key={idx} category={category} />
         ))}
       </div>
     </Link>

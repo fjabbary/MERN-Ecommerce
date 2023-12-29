@@ -12,7 +12,7 @@ const DropDown = () => {
         cartItems.map((item) => (
           <div key={item.id} className="dropItem">
             <div>
-              <img src={item.image} alt={item.name} />
+              <img src={item.imageUrl} alt={item.name} />
             </div>
             <div>
               <p>{item.name}</p>

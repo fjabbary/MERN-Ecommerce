@@ -31,8 +31,8 @@ const Cart = () => {
     }
   };
 
-  const handleChangeQty = (id, direction) => {
-    dispatch(changeCartItemQuantity({ id, direction }));
+  const handleChangeQty = (id, direction, name) => {
+    dispatch(changeCartItemQuantity({ id, direction, name }));
   };
 
   return (
@@ -61,7 +61,7 @@ const Cart = () => {
               <div className="cart-item" key={cartItem.id}>
                 <div className="cart-desc">
                   <div className="cart-image-container">
-                    <img src={cartItem.image} alt={cartItem.name} />
+                    <img src={cartItem.imageUrl} alt={cartItem.name} />
                   </div>
                   <div className="details">
                     <p className="title">{cartItem.name}</p>
@@ -77,14 +77,20 @@ const Cart = () => {
                 <div className="cart-price">${cartItem.price}</div>
                 <div className="cart-qty">
                   <button
-                    onClick={() => handleChangeQty(cartItem.id, "dec")}
+                    onClick={() =>
+                      handleChangeQty(cartItem.id, "dec", cartItem.name)
+                    }
                     disabled={cartItem.quantity === 1}
                   >
                     {" "}
                     -{" "}
                   </button>
                   <span>{cartItem.quantity}</span>
-                  <button onClick={() => handleChangeQty(cartItem.id, "inc")}>
+                  <button
+                    onClick={() =>
+                      handleChangeQty(cartItem.id, "inc", cartItem.name)
+                    }
+                  >
                     {" "}
                     +{" "}
                   </button>

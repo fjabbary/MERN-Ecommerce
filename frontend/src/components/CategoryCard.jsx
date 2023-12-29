@@ -1,6 +1,6 @@
 const CategoryCard = ({ category }) => {
   const { title, imageUrl } = category;
-  console.log(title);
+
   return (
     <div className="category-card">
       <img src={imageUrl} alt={`Category: ${title}`} />

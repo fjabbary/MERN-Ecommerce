@@ -1,11 +1,11 @@
-import React from "react";
 import { useGetAllProductsQuery } from "../features/productsApi";
 import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import ProductCard from "./ProductCard";
 
 const Home = () => {
   const { data, isError, isLoading } = useGetAllProductsQuery();
-  console.log(data);
 
   const dispatch = useDispatch();
 
@@ -19,19 +19,16 @@ const Home = () => {
       {data?.map((category, index) => {
         return (
           <div key={index}>
-            <h2 className="product-header">{category.title}</h2>
+            <Link to={`/shop-now/${category.title}`}>
+              <h2 className="product-header">{category.title}</h2>
+            </Link>
             <div className="all-categories">
-              {category.items.map((item) => (
-                <div key={item.id} className="product-card">
-                  <div className="product-img-container">
-                    <img src={item.imageUrl} alt={item.name} />
-                    <div className="product-details">
-                      <div className="product-name">{item.name}</div>
-                      <div className="product-price">${item.price}</div>
-                    </div>
-                    <button className="btn btn-details">View Details</button>
-                  </div>
-                </div>
+              {category.items.slice(0, 4).map((item) => (
+                <ProductCard
+                  item={item}
+                  key={item.id}
+                  category={category.title}
+                />
               ))}
             </div>
           </div>
