@@ -170,7 +170,7 @@ body {
 .titles {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #aaa;
   padding-bottom: 20px;
 }
 
@@ -178,7 +178,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #aaa;
   align-items: center;
 }
 
@@ -193,6 +193,7 @@ body {
 
 .cart-image-container img {
   width: 100%;
+  border: 1px solid black;
 }
 
 .cart-desc .title {
