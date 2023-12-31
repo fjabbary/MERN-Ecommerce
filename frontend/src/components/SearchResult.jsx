@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 const SearchResult = () => {
   const { results } = useSelector((state) => state.search.results);
-  console.log(results);
+
   return (
     <div className="search-result">
       {results?.map((item) => (

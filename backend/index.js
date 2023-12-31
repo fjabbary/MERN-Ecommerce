@@ -46,20 +46,37 @@ app.get("/products/:category/:id", (req, res) => {
 app.get("/api/search/:query", (req, res) => {
   let query = req.params.query;
 
-  console.log(query);
-
   let allProducts = [];
+  allFeatures = [];
 
   products.forEach(prod => {
-    allProducts = [...allProducts, [...prod.items, prod.title]]
+    allProducts.push(...prod.items, prod.title)
+    // allProducts = [...allProducts, ...prod.items]
   })
 
-  const results = allProducts.filter(item => item.slice(0, allProducts.length).name.toLowerCase().includes(query.toLowerCase()))
+
+  const nameMatch = allProducts.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+  const featuresMatch = allProducts.filter(item => {
+    item.features = item.features.filter(feature => feature.toLowerCase().includes(query.toLowerCase()));
+    return item.features.length > 0; // Remove parent objects without matching inner categories
+  });
+
+  const allResults = [...nameMatch, ...featuresMatch];
+
+  const sortedArr = allResults.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1
+    }
+  })
+
+  const noDuplicate = sortedArr.filter((_, idx) => sortedArr[idx] !== sortedArr[idx + 1])
 
   res.json({
-    numberOfResults: results.length,
-    results,
+    numberOfResults: noDuplicate.length,
+    results: noDuplicate
   });
+
+
 })
 
 
