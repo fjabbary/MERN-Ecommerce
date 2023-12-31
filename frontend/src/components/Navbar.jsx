@@ -4,10 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleCartDropdown } from "../features/cartSlice";
 import { useEffect } from "react";
 import { calcCartTotalQuantity } from "../features/cartSlice";
+import styled from "styled-components";
+import { logoutUser } from "../features/authSlice";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const cartTotalQty = useSelector((state) => state.cart.cartTotalQty);
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -19,15 +23,30 @@ const Navbar = () => {
     dispatch(calcCartTotalQuantity());
   }, [dispatch]);
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    toast.warning("Logged out!", { position: "bottom-right" });
+  };
+
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container">
       <div className="nav-bar">
         <Link to="/">
           <img src="/logo.png" alt="" className="logo" />
         </Link>
 
+        {isCartOpen && <DropDown />}
+
         <div className="nav-right">
           <Link to="/shop-now">Shop Now</Link>
+          {auth._id ? (
+            <Logout onClick={handleLogout}> Logout </Logout>
+          ) : (
+            <AuthLinks>
+              <Link to="/login"> Login </Link>
+              <Link to="/register"> Register </Link>
+            </AuthLinks>
+          )}
           <div className="nav-bag" onClick={handleToggle}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,10 +65,22 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {isCartOpen && <DropDown />}
-    </div>
+    </nav>
   );
 };
 
 export default Navbar;
+
+const Logout = styled.div`
+  color: #fff;
+  cursor: pointer;
+  margin-right: 2rem;
+`;
+
+const AuthLinks = styled.div`
+  a {
+    &:last-child {
+      margin-right: 2rem;
+    }
+  }
+`;

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { productFetch } from "../features/productSlice";
+import { productFetch, clearSelected } from "../features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import ImageGallery from "react-image-gallery";
@@ -17,6 +17,10 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(productFetch({ category, id }));
+
+    return () => {
+      dispatch(clearSelected());
+    };
   }, [category, id, dispatch]);
 
   return (

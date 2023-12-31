@@ -292,6 +292,7 @@ body {
   background-color: #fff;
   overflow-y: scroll;
   padding: 15px;
+  z-index: 999;
 }
 
 .dropItem {
@@ -474,6 +475,17 @@ body {
   height: 60px !important;
 }
 
-.image-gallery-play-button {
+.image-gallery-play-button,
+.image-gallery-fullscreen-button {
   display: none;
+}
+
+.login-btn {
+  color: #000;
+  background: rgb(255, 181, 42);
+  padding: 10px 40px;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }

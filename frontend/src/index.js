@@ -10,12 +10,15 @@ import cartReducer from './features/cartSlice';
 import { productsApi } from './features/productsApi';
 import categoryReducer, { categoriesFetch } from './features/categoriesSlice';
 
+import authReducer, { loadUser } from './features/authSlice';
+
 const store = configureStore({
   reducer: {
     products: productReducer,
     [productsApi.reducerPath]: productsApi.reducer,
     cart: cartReducer,
-    categories: categoryReducer
+    categories: categoryReducer,
+    auth: authReducer
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(productsApi.middleware);
@@ -25,6 +28,7 @@ const store = configureStore({
 
 store.dispatch(productsFetch())
 store.dispatch(categoriesFetch())
+store.dispatch(loadUser())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

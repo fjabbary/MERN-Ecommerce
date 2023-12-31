@@ -9,6 +9,8 @@ import NotFound from './components/NotFound';
 import ShopNow from './components/ShopNow';
 import OneCategoryItems from './components/OneCategoryItems';
 import ProductDetails from './components/ProductDetails';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/shop-now" element={<ShopNow />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/shop-now/:category" element={<OneCategoryItems />} />
         <Route path="/shop-now/:category/:id" element={<ProductDetails />} />
         <Route path="*" element={<NotFound />} />
