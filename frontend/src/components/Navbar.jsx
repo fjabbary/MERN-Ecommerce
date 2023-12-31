@@ -7,8 +7,14 @@ import { calcCartTotalQuantity } from "../features/cartSlice";
 import styled from "styled-components";
 import { logoutUser } from "../features/authSlice";
 import { toast } from "react-toastify";
+import { searchProducts } from "../features/searchSlice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const cartTotalQty = useSelector((state) => state.cart.cartTotalQty);
   const auth = useSelector((state) => state.auth);
@@ -28,12 +34,26 @@ const Navbar = () => {
     toast.warning("Logged out!", { position: "bottom-right" });
   };
 
+  const handleSearch = () => {
+    dispatch(searchProducts(query));
+    navigate("/search-result");
+  };
+
   return (
     <nav className="navbar-container">
       <div className="nav-bar">
         <Link to="/">
           <img src="/logo.png" alt="" className="logo" />
         </Link>
+
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="search"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <i className="fa fa-search" onClick={handleSearch}></i>
+        </div>
 
         {isCartOpen && <DropDown />}
 

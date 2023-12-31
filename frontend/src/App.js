@@ -11,6 +11,7 @@ import OneCategoryItems from './components/OneCategoryItems';
 import ProductDetails from './components/ProductDetails';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import SearchResult from './components/SearchResult';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/shop-now" element={<ShopNow />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/search-result" element={<SearchResult />} />
         <Route path="/shop-now/:category" element={<OneCategoryItems />} />
         <Route path="/shop-now/:category/:id" element={<ProductDetails />} />
         <Route path="*" element={<NotFound />} />

@@ -489,3 +489,24 @@ body {
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+/* Search */
+.search-result {
+  display: flex;
+}
+
+.search-container input {
+  height: 30px;
+  width: 300px;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+}
+
+.search-container .fa {
+  position: relative;
+  left: 280px;
+  top: 5px;
+  cursor: pointer;
+}

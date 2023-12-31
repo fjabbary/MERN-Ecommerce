@@ -43,6 +43,26 @@ app.get("/products/:category/:id", (req, res) => {
 })
 
 
+app.get("/api/search/:query", (req, res) => {
+  let query = req.params.query;
+
+  console.log(query);
+
+  let allProducts = [];
+
+  products.forEach(prod => {
+    allProducts = [...allProducts, [...prod.items, prod.title]]
+  })
+
+  const results = allProducts.filter(item => item.slice(0, allProducts.length).name.toLowerCase().includes(query.toLowerCase()))
+
+  res.json({
+    numberOfResults: results.length,
+    results,
+  });
+})
+
+
 const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;
 
