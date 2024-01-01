@@ -10,6 +10,8 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state) => state.products);
 
+  console.log(selectedProduct);
+
   const handleAddToCart = (prod) => {
     dispatch(addToCart(prod));
     dispatch(calcCartTotalQuantity());

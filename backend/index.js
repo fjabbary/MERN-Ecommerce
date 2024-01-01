@@ -47,11 +47,11 @@ app.get("/api/search/:query", (req, res) => {
   let query = req.params.query;
 
   let allProducts = [];
+  let initialProducts = products;
   allFeatures = [];
 
   products.forEach(prod => {
-    allProducts.push(...prod.items, prod.title)
-    // allProducts = [...allProducts, ...prod.items]
+    allProducts = [...allProducts, ...prod.items]
   })
 
 
@@ -60,6 +60,7 @@ app.get("/api/search/:query", (req, res) => {
     item.features = item.features.filter(feature => feature.toLowerCase().includes(query.toLowerCase()));
     return item.features.length > 0; // Remove parent objects without matching inner categories
   });
+
 
   const allResults = [...nameMatch, ...featuresMatch];
 

@@ -39,6 +39,12 @@ const Navbar = () => {
     navigate("/search-result");
   };
 
+  const handleSearchEnter = (e) => {
+    if (e.keyCode === 13) {
+      handleSearch();
+    }
+  };
+
   return (
     <nav className="navbar-container">
       <div className="nav-bar">
@@ -51,6 +57,7 @@ const Navbar = () => {
             type="text"
             placeholder="search"
             onChange={(e) => setQuery(e.target.value)}
+            onKeyUp={handleSearchEnter}
           />
           <i className="fa fa-search" onClick={handleSearch}></i>
         </div>

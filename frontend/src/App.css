@@ -29,6 +29,15 @@ body {
   padding: 0 4rem;
 }
 
+@media (max-width: 767px) {
+  .nav-bar {
+    flex-direction: column;
+    height: 250px;
+    justify-content: space-between;
+    padding: 0 4rem 1rem;
+  }
+}
+
 .nav-bar .nav-bag,
 .nav-bar a {
   color: white;
@@ -326,6 +335,13 @@ body {
   justify-content: space-between;
 }
 
+@media (max-width: 768px) {
+  .categories-container {
+    width: 80%;
+    margin: 50px auto;
+  }
+}
+
 .category-card {
   position: relative;
   cursor: pointer;
@@ -498,6 +514,10 @@ body {
   width: 80%;
 }
 
+.search-container {
+  width: 300px;
+}
+
 .search-container input {
   height: 30px;
   width: 300px;
@@ -512,4 +532,25 @@ body {
   left: 280px;
   top: 5px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .register-form {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .desc {
+    flex-direction: column;
+  }
+
+  .desc .left,
+  .desc .right {
+    width: unset;
+  }
+  .desc .right {
+    padding: 0 30px;
+  }
 }
