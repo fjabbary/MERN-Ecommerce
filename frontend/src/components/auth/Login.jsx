@@ -47,7 +47,7 @@ const Login = () => {
           name="password"
           onChange={handleFormChange}
         />
-        <button>Register</button>
+        <button>Login</button>
         <small>
           <p className="error-msg">{loginError}</p>{" "}
         </small>

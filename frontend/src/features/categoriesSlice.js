@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const categoriesFetch = createAsyncThunk(
-  "products/productsFetch",
+  "categories/productsFetch",
   async () => {
     const res = await axios.get("http://localhost:5000/categories");
     return res?.data;

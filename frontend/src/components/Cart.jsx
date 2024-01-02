@@ -26,7 +26,9 @@ const Cart = () => {
   }, [cart, dispatch]);
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    if (window.confirm("Are you sure you want to clear the cart?")) {
+      dispatch(clearCart());
+    }
   };
 
   const handleRemoveCartItem = (item) => {
@@ -62,7 +64,7 @@ const Cart = () => {
 
           <div className="cart-items">
             {cart.cartItems?.map((cartItem) => (
-              <div className="cart-item" key={cartItem.id}>
+              <div className="cart-item" key={cartItem._id}>
                 <div className="cart-desc">
                   <div className="cart-image-container">
                     <img src={cartItem.imageUrl} alt={cartItem.name} />
@@ -82,7 +84,7 @@ const Cart = () => {
                 <div className="cart-qty">
                   <button
                     onClick={() =>
-                      handleChangeQty(cartItem.id, "dec", cartItem.name)
+                      handleChangeQty(cartItem._id, "dec", cartItem.name)
                     }
                     disabled={cartItem.quantity === 1}
                   >
@@ -92,7 +94,7 @@ const Cart = () => {
                   <span>{cartItem.quantity}</span>
                   <button
                     onClick={() =>
-                      handleChangeQty(cartItem.id, "inc", cartItem.name)
+                      handleChangeQty(cartItem._id, "inc", cartItem.name)
                     }
                   >
                     {" "}

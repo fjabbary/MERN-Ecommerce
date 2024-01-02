@@ -10,7 +10,7 @@ const DropDown = () => {
         <p className="no-cart-item">No item in the cart!</p>
       ) : (
         cartItems.map((item) => (
-          <div key={item.id} className="dropItem">
+          <div key={item._id} className="dropItem">
             <div>
               <img src={item.imageUrl} alt={item.name} />
             </div>

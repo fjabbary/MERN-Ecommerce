@@ -1,39 +1,36 @@
 import { useGetAllProductsQuery } from "../features/productsApi";
-import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const { data, isError, isLoading } = useGetAllProductsQuery();
+  // const { data } = useGetAllProductsQuery();
+  const { products } = useSelector((state) => state.products);
 
-  const dispatch = useDispatch();
+  const productsData = [...products];
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    dispatch(calcCartTotalQuantity());
-  };
+  const categories = productsData.map((item) => item.category);
+  const uniqueCategories = [...new Set(categories)];
+
+  console.log(uniqueCategories);
+  console.log(productsData);
 
   return (
     <div className="all-categories-container">
-      {data?.map((category, index) => {
-        return (
-          <div key={index}>
-            <Link to={`/shop-now/${category.title}`}>
-              <h2 className="product-header">{category.title}</h2>
-            </Link>
-            <div className="all-categories">
-              {category.items.slice(0, 4).map((item) => (
-                <ProductCard
-                  item={item}
-                  key={item.id}
-                  category={category.title}
-                />
-              ))}
-            </div>
+      {uniqueCategories.map((category, index) => (
+        <div key={index}>
+          <Link to={`/shop-now/${category}`}>
+            <h2 className="product-header">{category}</h2>
+          </Link>
+          <div className="all-categories">
+            {productsData.map((item) =>
+              item.category === category ? (
+                <ProductCard item={item} key={item._id} />
+              ) : null
+            )}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 };

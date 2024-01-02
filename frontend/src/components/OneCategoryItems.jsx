@@ -6,7 +6,7 @@ const OneCategoryItems = () => {
   const { category } = useParams();
   const { data } = useGetAllProductsQuery();
 
-  const foundEl = data?.find((el) => el.title === category);
+  const foundCategoryItems = data?.filter((el) => el.category === category);
 
   const styleContainer = {
     margin: "40px auto",
@@ -21,8 +21,8 @@ const OneCategoryItems = () => {
       </div>
       <h1 style={{ textAlign: "center" }}>{category}</h1>
       <div className="product-container">
-        {foundEl?.items.map((item) => (
-          <ProductCard key={item.id} item={item} category={category} />
+        {foundCategoryItems?.map((item) => (
+          <ProductCard key={item._id} item={item} category={category} />
         ))}
       </div>
     </div>

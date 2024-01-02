@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ item, category }) => {
+const ProductCard = ({ item }) => {
   return (
     <div className="product-card">
       <div className="product-img-container">
@@ -10,7 +10,7 @@ const ProductCard = ({ item, category }) => {
           <div className="product-price">${item.price}</div>
         </div>
         <Link
-          to={`/shop-now/${category}/${item.id}`}
+          to={`/shop-now/${item.category}/${item._id}`}
           className="btn btn-details"
         >
           View Details

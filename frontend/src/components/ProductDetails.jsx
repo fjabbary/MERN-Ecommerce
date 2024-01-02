@@ -18,7 +18,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    dispatch(productFetch({ category, id }));
+    dispatch(productFetch(id));
 
     return () => {
       dispatch(clearSelected());

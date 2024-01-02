@@ -7,7 +7,7 @@ const SearchResult = () => {
   return (
     <div className="search-result">
       {results?.map((item) => (
-        <ProductCard item={item} key={item.id} category={item.category} />
+        <ProductCard item={item} key={item._id} category={item.category} />
       ))}
     </div>
   );

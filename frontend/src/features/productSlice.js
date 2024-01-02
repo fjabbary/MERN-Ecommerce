@@ -18,8 +18,8 @@ export const productsFetch = createAsyncThunk(
 
 export const productFetch = createAsyncThunk(
   "products/productFetch",
-  async ({ category, id }) => {
-    const res = await axios.get(`http://localhost:5000/products/${category}/${id}`);
+  async (id) => {
+    const res = await axios.get(`http://localhost:5000/products/${id}`);
     return res?.data;
   }
 )

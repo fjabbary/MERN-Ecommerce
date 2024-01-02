@@ -13,7 +13,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      const existingCartItem = state.cartItems.find((item) => item.id === action.payload.id);
+      const existingCartItem = state.cartItems.find((item) => item._id === action.payload._id);
       if (existingCartItem) {
         existingCartItem.quantity += 1;
         toast.info(`Increased quantity of ${action.payload.name}`, {
@@ -46,8 +46,8 @@ const cartSlice = createSlice({
     },
 
     removeCartItem(state, action) {
-      const { id, name } = action.payload;
-      const foundIndex = state.cartItems.findIndex((item) => item.id === id);
+      const { _id, name } = action.payload;
+      const foundIndex = state.cartItems.findIndex((item) => item._id === _id);
       state.cartItems.splice(foundIndex, 1);
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
       toast.error(`${name} removed from the cart`, {
@@ -57,7 +57,7 @@ const cartSlice = createSlice({
 
     changeCartItemQuantity(state, action) {
       const { id, direction, name } = action.payload;
-      const foundIndex = state.cartItems.findIndex((item) => item.id === id);
+      const foundIndex = state.cartItems.findIndex((item) => item._id === id);
 
       if (direction === "inc") {
         state.cartItems[foundIndex].quantity += 1

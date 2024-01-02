@@ -65,6 +65,13 @@ const Navbar = () => {
         {isCartOpen && <DropDown />}
 
         <div className="nav-right">
+          <Link>
+            {auth._id && (
+              <span className="login-name">
+                Hello {auth.name?.split(" ")[0]}
+              </span>
+            )}
+          </Link>
           <Link to="/shop-now">Shop Now</Link>
           {auth._id ? (
             <Logout onClick={handleLogout}> Logout </Logout>

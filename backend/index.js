@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const products = require('./products');
-const categories = require('./categories');
+// const products = require('./products');
 const register = require('./routes/register');
 const login = require('./routes/login');
+
+const { Category } = require('./models/category');
+const { Product } = require('./models/product');
 
 const mongoose = require('mongoose');
 
@@ -22,24 +24,21 @@ app.get("/", (req, res) => {
   res.send("Welcome to the API!");
 })
 
-app.get('/categories', (req, res) => {
+app.get('/categories', async (req, res) => {
+  const categories = await Category.find()
   res.send(categories);
 })
 
-app.get("/products", (req, res) => {
+app.get("/products", async (req, res) => {
+  const products = await Product.find();
   res.send(products);
 })
 
-app.get("/products/:category/:id", (req, res) => {
-  const { id, category } = req.params;
-  const product = products.filter(item => {
-    if (item.title === category) {
-      return { ...item }
-    }
-  })
+app.get("/products/:id", async (req, res) => {
+  const { id } = req.params;
+  const oneProduct = await Product.findById(id);
 
-  const foundItem = product[0].items.find(product => product.id == id);
-  res.send(foundItem);
+  res.send(oneProduct);
 })
 
 
@@ -55,7 +54,8 @@ app.get("/api/search/:query", (req, res) => {
   })
 
 
-  const nameMatch = allProducts.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+  const nameMatch = allProducts.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+
   const featuresMatch = allProducts.filter(item => {
     item.features = item.features.filter(feature => feature.toLowerCase().includes(query.toLowerCase()));
     return item.features.length > 0; // Remove parent objects without matching inner categories
