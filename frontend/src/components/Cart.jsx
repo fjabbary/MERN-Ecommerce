@@ -10,14 +10,14 @@ import {
   calcCartTotalQuantity,
 } from "../features/cartSlice";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PayButton from "./PayButton";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(closeCartDropdown());
@@ -121,7 +121,7 @@ const Cart = () => {
               <p className="tax">Taxes and shipping calculated at checkout</p>
 
               {auth._id ? (
-                <button className="checkout-btn">Check out</button>
+                <PayButton cartItems={cart.cartItems} />
               ) : (
                 <Link to="/login" className="login-btn">
                   Login to checkout

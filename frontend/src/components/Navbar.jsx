@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { searchProducts } from "../features/searchSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../features/authSlice";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
@@ -27,7 +28,8 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(calcCartTotalQuantity());
-  }, [dispatch]);
+    dispatch(getUser(auth._id));
+  }, [dispatch, auth._id]);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -68,7 +70,7 @@ const Navbar = () => {
           <Link>
             {auth._id && (
               <span className="login-name">
-                Hello {auth.name?.split(" ")[0]}
+                Hello {auth.user?.name?.split(" ")[0]}
               </span>
             )}
           </Link>

@@ -12,6 +12,7 @@ import ProductDetails from './components/ProductDetails';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import SearchResult from './components/SearchResult';
+import CheckoutSuccess from './components/CheckoutSuccess';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/search-result" element={<SearchResult />} />
+        <Route path="/checkout-success" element={<CheckoutSuccess />} />
         <Route path="/shop-now/:category" element={<OneCategoryItems />} />
         <Route path="/shop-now/:category/:id" element={<ProductDetails />} />
         <Route path="*" element={<NotFound />} />

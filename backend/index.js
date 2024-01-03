@@ -6,8 +6,12 @@ const login = require('./routes/login');
 
 const { Category } = require('./models/category');
 const { Product } = require('./models/product');
+const { User } = require('./models/user');
+
 
 const mongoose = require('mongoose');
+
+const stripe = require('./routes/stripe');
 
 require("dotenv").config();
 
@@ -17,8 +21,11 @@ app.use(express.json())
 
 app.use("/api/register", register)
 app.use("/api/login", login)
+app.use("/api/stripe", stripe)
 
 app.use(express.json());
+
+
 
 app.get("/", (req, res) => {
   res.send("Welcome to the API!");
@@ -42,44 +49,23 @@ app.get("/products/:id", async (req, res) => {
 })
 
 
-app.get("/api/search/:query", (req, res) => {
+app.get("/api/search/:query", async (req, res) => {
   let query = req.params.query;
+  const regexPattern = new RegExp(query, 'i');
+  const namesMatch = await Product.find({ name: { $regex: regexPattern } })
 
-  let allProducts = [];
-  let initialProducts = products;
-  allFeatures = [];
-
-  products.forEach(prod => {
-    allProducts = [...allProducts, ...prod.items]
-  })
-
-
-  const nameMatch = allProducts.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
-
-  const featuresMatch = allProducts.filter(item => {
-    item.features = item.features.filter(feature => feature.toLowerCase().includes(query.toLowerCase()));
-    return item.features.length > 0; // Remove parent objects without matching inner categories
+  res.send({
+    numOfResults: namesMatch.length,
+    results: namesMatch
   });
-
-
-  const allResults = [...nameMatch, ...featuresMatch];
-
-  const sortedArr = allResults.sort((a, b) => {
-    if (a.name < b.name) {
-      return -1
-    }
-  })
-
-  const noDuplicate = sortedArr.filter((_, idx) => sortedArr[idx] !== sortedArr[idx + 1])
-
-  res.json({
-    numberOfResults: noDuplicate.length,
-    results: noDuplicate
-  });
-
-
 })
 
+app.get('/api/user/:id', async (req, res) => {
+  const userId = req.params.id;
+  const foundUser = await User.findById(userId);
+
+  res.send({ user: foundUser });
+})
 
 const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;

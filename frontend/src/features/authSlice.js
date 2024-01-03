@@ -60,6 +60,15 @@ export const loginUser = createAsyncThunk(
 )
 
 
+export const getUser = createAsyncThunk(
+  "auth/getUser",
+  async (id) => {
+    const res = await axios.get(`${url}/user/${id}`)
+    return res.data.user;
+  }
+)
+
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -152,6 +161,10 @@ const authSlice = createSlice({
         loginError: action.payload
       }
     });
+
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      return { ...state, user: action.payload }
+    })
   },
 })
 
