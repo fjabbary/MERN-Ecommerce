@@ -11,14 +11,18 @@ import { searchProducts } from "../features/searchSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../features/authSlice";
+import AdavncedSearch from "./AdavncedSearch";
+import { toggleSearchDropdown } from "../features/searchSlice";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
+
   const navigate = useNavigate();
 
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const cartTotalQty = useSelector((state) => state.cart.cartTotalQty);
   const auth = useSelector((state) => state.auth);
+  const { searchDropdownOpen } = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
 
@@ -28,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(calcCartTotalQuantity());
-    dispatch(getUser(auth._id));
+    // dispatch(getUser(auth._id));
   }, [dispatch, auth._id]);
 
   const handleLogout = () => {
@@ -64,14 +68,29 @@ const Navbar = () => {
           <i className="fa fa-search" onClick={handleSearch}></i>
         </div>
 
+        <div>
+          <span
+            className="adv-search-text"
+            onClick={() => dispatch(toggleSearchDropdown())}
+          >
+            Advanced Search <i className="fa-solid fa-caret-down"></i>
+          </span>
+
+          {searchDropdownOpen && <AdavncedSearch />}
+        </div>
+
         {isCartOpen && <DropDown />}
 
         <div className="nav-right">
           <Link>
             {auth._id && (
-              <span className="login-name">
-                Hello {auth.user?.name?.split(" ")[0]}
-              </span>
+              <>
+                Hello
+                <span className="login-name">
+                  {" "}
+                  {auth.user?.name?.split(" ")[0]}{" "}
+                </span>
+              </>
             )}
           </Link>
           <Link to="/shop-now">Shop Now</Link>

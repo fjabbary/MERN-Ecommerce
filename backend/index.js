@@ -51,12 +51,24 @@ app.get("/products/:id", async (req, res) => {
 
 app.get("/api/search/:query", async (req, res) => {
   let query = req.params.query;
-  const regexPattern = new RegExp(query, 'i');
-  const namesMatch = await Product.find({ name: { $regex: regexPattern } })
+  const Query = new RegExp(query, 'i');
+  const nameOrDescMatch = await Product.find({ $or: [{ name: { $regex: Query } }, { features: { $in: Query } }] })
 
   res.send({
-    numOfResults: namesMatch.length,
-    results: namesMatch
+    numOfResults: nameOrDescMatch.length,
+    results: nameOrDescMatch
+  });
+})
+
+app.post("/api/advancedSearch", async (req, res) => {
+  const { minPrice, maxPrice, category } = req.body.data;
+  console.log(req.body);
+
+  const foundProducts = await Product.find({ price: { $lte: maxPrice }, price: { $gte: minPrice }, category });
+
+  res.send({
+    numOfResults: foundProducts.length,
+    results: foundProducts
   });
 })
 

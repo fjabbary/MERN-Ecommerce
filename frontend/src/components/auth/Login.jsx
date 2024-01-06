@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (auth._id) {
-      navigate("/shop-now");
+      navigate("/cart");
     }
   }, [auth._id, navigate]);
 
