@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 6,
     maxLength: 1024
-  }
+  },
+  favorites: [Object]
 })
 
 

@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <nav className="navbar-container">
       <div className="nav-bar">
-        <Link to="/">
+        <Link to="/" className="logo-container">
           <img src="/logo.png" alt="" className="logo" />
         </Link>
 
@@ -66,9 +66,7 @@ const Navbar = () => {
             onKeyUp={handleSearchEnter}
           />
           <i className="fa fa-search" onClick={handleSearch}></i>
-        </div>
 
-        <div>
           <span
             className="adv-search-text"
             onClick={() => dispatch(toggleSearchDropdown())}
@@ -82,17 +80,7 @@ const Navbar = () => {
         {isCartOpen && <DropDown />}
 
         <div className="nav-right">
-          <Link>
-            {auth._id && (
-              <>
-                Hello
-                <span className="login-name">
-                  {" "}
-                  {auth.user?.name?.split(" ")[0]}{" "}
-                </span>
-              </>
-            )}
-          </Link>
+          {auth._id && <Link to="/my-favorites">My Favorites</Link>}
           <Link to="/shop-now">Shop Now</Link>
           {auth._id ? (
             <Logout onClick={handleLogout}> Logout </Logout>

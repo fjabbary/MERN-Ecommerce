@@ -62,7 +62,6 @@ app.get("/api/search/:query", async (req, res) => {
 
 app.post("/api/advancedSearch", async (req, res) => {
   const { minPrice, maxPrice, category } = req.body.data;
-  console.log(req.body);
 
   const foundProducts = await Product.find({ price: { $lte: maxPrice }, price: { $gte: minPrice }, category });
 
@@ -77,6 +76,24 @@ app.get('/api/user/:id', async (req, res) => {
   const foundUser = await User.findById(userId);
 
   res.send({ user: foundUser });
+})
+
+app.put('/api/addToFavorite', async (req, res) => {
+  const { userId, favoriteProduct } = req.body;
+
+  await User.findByIdAndUpdate(userId, { "$push": { "favorites": favoriteProduct } }, { new: true })
+
+  res.send('Add to the favorite product');
+})
+
+app.post('/api/getFavorites', async (req, res) => {
+
+  const { userId } = req.body;
+  console.log(userId);
+  console.log(req.body);
+  const favorites = await User.findById(userId).select('favorites');
+  console.log(favorites);
+  res.send(favorites);
 })
 
 const port = process.env.PORT || 5000;

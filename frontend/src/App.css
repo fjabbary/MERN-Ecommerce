@@ -30,7 +30,7 @@ body {
 }
 
 .navbar-container {
-  border-bottom: 5px solid yellow;
+  border-bottom: 5px solid rgb(255, 221, 0);
 }
 
 @media (max-width: 767px) {
@@ -47,6 +47,14 @@ body {
   color: white;
   text-decoration: none;
 }
+.nav-bar .logo-container {
+  width: 150px;
+}
+
+.nav-bar a img {
+  width: 100%;
+}
+
 .nav-bar h2 {
   font-size: 32px;
 }
@@ -62,7 +70,7 @@ body {
   display: block;
   width: 24px;
   height: 24px;
-  background: yellow;
+  background: rgb(255, 221, 0);
   border-radius: 100%;
   color: var(--purple);
   text-align: center;
@@ -137,17 +145,6 @@ body {
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
-}
-
-.product button,
-.add-to-cart {
-  width: 100%;
-  height: 40px;
-  background-color: var(--purple);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 /* Cart */
@@ -292,6 +289,10 @@ body {
   color: #fff;
   margin-bottom: 15px;
   cursor: pointer;
+}
+
+.checkout-btn:disabled {
+  background-color: grey;
 }
 
 .dropdown {
@@ -547,6 +548,8 @@ body {
 .adv-search-text {
   color: #fff;
   cursor: pointer;
+  position: relative;
+  left: 300px;
 }
 
 @media (max-width: 768px) {
@@ -571,7 +574,7 @@ body {
 }
 
 .login-name {
-  color: yellow;
+  color: rgb(255, 221, 0);
 }
 
 .adv-search-dropdown {
@@ -586,7 +589,7 @@ body {
 }
 
 input[type="range"] {
-  width: 100%;
+  width: 80%;
 }
 
 #category-select {
@@ -599,4 +602,40 @@ input[type="range"] {
 #category-select-label {
   margin-top: 30px;
   display: inline-block;
+}
+
+.add-to-favorite {
+  background-color: rgb(255, 221, 0);
+  box-shadow: 2px 2px 1px #aaa;
+  border: none;
+  border-radius: 5px;
+  width: 47%;
+  height: 40px;
+  cursor: pointer;
+}
+
+.add-to-favorite:hover {
+  background-color: rgb(219, 190, 5);
+}
+
+.product button,
+.add-to-cart {
+  width: 47%;
+  height: 40px;
+  background-color: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 1px #aaa;
+}
+
+.add-to-cart:hover {
+  background-color: rgb(91, 29, 148);
+}
+
+.favorite-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: center;
 }

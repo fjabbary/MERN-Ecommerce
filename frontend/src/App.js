@@ -13,6 +13,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import SearchResult from './components/SearchResult';
 import CheckoutSuccess from './components/CheckoutSuccess';
+import MyFavorites from './components/MyFavorites';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/search-result" element={<SearchResult />} />
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
+        <Route path="/my-favorites" element={<MyFavorites />} />
         <Route path="/shop-now/:category" element={<OneCategoryItems />} />
         <Route path="/shop-now/:category/:id" element={<ProductDetails />} />
         <Route path="*" element={<NotFound />} />

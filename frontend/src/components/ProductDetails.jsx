@@ -1,16 +1,18 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { productFetch, clearSelected } from "../features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import ImageGallery from "react-image-gallery";
+import { addToFavorite } from "../features/favoriteSlice";
 
 const ProductDetails = () => {
   const { category, id } = useParams();
   const dispatch = useDispatch();
-  const { selectedProduct } = useSelector((state) => state.products);
+  const navigate = useNavigate();
 
-  console.log(selectedProduct);
+  const { selectedProduct } = useSelector((state) => state.products);
+  const auth = useSelector((state) => state.auth);
 
   const handleAddToCart = (prod) => {
     dispatch(addToCart(prod));
@@ -24,6 +26,11 @@ const ProductDetails = () => {
       dispatch(clearSelected());
     };
   }, [category, id, dispatch]);
+
+  const handleAddtoFavorite = (selectedProduct) => {
+    const data = { userId: auth._id, favoriteProduct: selectedProduct };
+    dispatch(addToFavorite(data));
+  };
 
   return (
     <div className="one-product">
@@ -58,12 +65,29 @@ const ProductDetails = () => {
             <b>Price:</b> ${selectedProduct.price}
           </h3>
 
-          <button
-            className="add-to-cart"
-            onClick={() => handleAddToCart(selectedProduct)}
-          >
-            Add to Cart
-          </button>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <button
+              className="add-to-cart"
+              onClick={() => handleAddToCart(selectedProduct)}
+            >
+              Add to Cart
+            </button>
+            {auth._id ? (
+              <button
+                className="add-to-favorite"
+                onClick={() => handleAddtoFavorite(selectedProduct)}
+              >
+                <i className="fa fa-plus"></i> Add to Favorite
+              </button>
+            ) : (
+              <button
+                className="add-to-favorite"
+                onClick={() => navigate("/login")}
+              >
+                Login to add to favorite
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
