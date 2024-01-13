@@ -49,6 +49,7 @@ body {
 }
 .nav-bar .logo-container {
   width: 150px;
+  display: inline-block;
 }
 
 .nav-bar a img {
@@ -182,6 +183,13 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid #aaa;
   padding-bottom: 20px;
+}
+
+.product-title-mobile,
+.product-price-mobile,
+.product-qty-mobile,
+.product-totalPrice-mobile {
+  display: none;
 }
 
 .cart-item {
@@ -516,6 +524,14 @@ body {
   margin-bottom: 10px;
 }
 
+.login-btn:hover {
+  background-color: rgb(228, 152, 11);
+}
+
+.fa-lock {
+  margin-right: 10px;
+}
+
 /* Search */
 .search-result {
   display: flex;
@@ -525,23 +541,24 @@ body {
 }
 
 .search-container {
-  width: 300px;
+  max-width: 300px;
+  position: relative;
+  top: 10px;
 }
 
 .search-container input {
-  height: 30px;
-  width: 300px;
+  height: 40px;
+  width: 100%;
   padding: 3px 10px;
   border: none;
   border-radius: 5px;
-  position: absolute;
   opacity: 0.9;
 }
 
 .search-container .fa {
-  position: relative;
-  left: 280px;
-  top: 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
   cursor: pointer;
 }
 
@@ -550,6 +567,23 @@ body {
   cursor: pointer;
   position: relative;
   left: 300px;
+  bottom: 30px;
+  margin-left: 20px;
+}
+
+@media (max-width: 1150px) {
+  .nav-bar {
+    flex-direction: column;
+    height: 180px;
+    padding-bottom: 40px;
+  }
+
+  .dropdown {
+    top: 180px;
+  }
+}
+
+@media (max-width: 1000px) {
 }
 
 @media (max-width: 768px) {
@@ -557,9 +591,6 @@ body {
     width: 80%;
     margin: auto;
   }
-}
-
-@media (max-width: 768px) {
   .desc {
     flex-direction: column;
   }
@@ -571,6 +602,56 @@ body {
   .desc .right {
     padding: 0 30px;
   }
+
+  .adv-search-text {
+    left: 0;
+    bottom: 65px;
+  }
+}
+
+@media (max-width: 500px) {
+  .nav-bar {
+    padding: 1rem;
+  }
+
+  .titles {
+    display: none;
+  }
+  .product-title-mobile,
+  .product-price-mobile,
+  .product-qty-mobile,
+  .product-totalPrice-mobile {
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+  }
+
+  .cart-desc {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cart-container .row {
+    flex-direction: column;
+    margin-top: 60px;
+  }
+
+  .clear-btn {
+    margin-bottom: 40px;
+  }
+
+  .clear-btn button {
+    width: 100%;
+  }
+
+  .subtotal {
+    justify-content: space-around;
+    background-color: #eee;
+    padding: 10px 0;
+  }
 }
 
 .login-name {
@@ -578,12 +659,12 @@ body {
 }
 
 .adv-search-dropdown {
-  width: 300px;
+  max-width: 300px;
   background-color: #fff;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   z-index: 999;
   position: absolute;
-  top: 65px;
+  top: 40px;
   padding: 30px;
   border: 1px solid #aaa;
 }
@@ -618,6 +699,21 @@ input[type="range"] {
   background-color: rgb(219, 190, 5);
 }
 
+.remove-from-favorite {
+  margin: 20px;
+  width: 80%;
+  height: 40px;
+  display: flex;
+  background-color: rgb(255, 221, 0);
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
 .product button,
 .add-to-cart {
   width: 47%;
@@ -637,5 +733,68 @@ input[type="range"] {
 .favorite-products {
   display: flex;
   flex-wrap: wrap;
-  justify-self: center;
+  justify-content: center;
+}
+
+.fa-trash {
+  margin-right: 10px;
+}
+
+.checkout-success {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.fa-check {
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.fa-check:before {
+  content: "\f00c";
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  color: rgb(1, 184, 1);
+  border-radius: 5px;
+  font-size: 45px;
+  margin-right: 20px;
+}
+
+.checkout-success span {
+  margin-left: 20px;
+}
+
+.rate-product {
+  margin-top: 40px;
+  display: flex;
+  width: 160px;
+  justify-content: space-between;
+}
+
+.rate-product .btn {
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.rate-product .btn-liked {
+  background-color: rgb(27, 202, 27);
+}
+
+.rate-product .btn-disliked {
+  background-color: rgb(237, 28, 28);
+}
+
+.rate-number {
+  margin-top: 40px;
+}
+
+.full-scale {
+  width: 230px;
+  height: 5px;
+  background: #aaa;
 }

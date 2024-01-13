@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const DropDown = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
+
   return (
     <div className="dropdown">
       {cartItems.length === 0 ? (

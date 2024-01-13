@@ -67,6 +67,9 @@ app.post("/api/advancedSearch", async (req, res) => {
 
   res.send({
     numOfResults: foundProducts.length,
+    minPrice,
+    maxPrice,
+    category,
     results: foundProducts
   });
 })
@@ -79,21 +82,36 @@ app.get('/api/user/:id', async (req, res) => {
 })
 
 app.put('/api/addToFavorite', async (req, res) => {
+
   const { userId, favoriteProduct } = req.body;
 
-  await User.findByIdAndUpdate(userId, { "$push": { "favorites": favoriteProduct } }, { new: true })
+  const favorites = await User.findById(userId).select('favorites');
+  const favoriteExist = favorites.favorites.find(item => item._id === favoriteProduct._id)
 
-  res.send('Add to the favorite product');
+  if (!favoriteExist) {
+    await User.findByIdAndUpdate(userId, { "$addToSet": { "favorites": favoriteProduct } }, { new: true })
+    res.send('Add to the favorite products');
+  } else {
+    res.send('Product already added to the favorites')
+  }
 })
 
 app.post('/api/getFavorites', async (req, res) => {
-
   const { userId } = req.body;
-  console.log(userId);
-  console.log(req.body);
   const favorites = await User.findById(userId).select('favorites');
-  console.log(favorites);
   res.send(favorites);
+})
+
+app.put('/api/deleteFavorite/:productId', async (req, res) => {
+  const { userId } = req.body;
+  const productId = req.params.productId;
+
+  console.log(req.body);
+  console.log(productId);
+
+  await User.findByIdAndUpdate(userId, { $pull: { favorites: { _id: productId } } }, { new: true })
+
+  res.send(productId);
 })
 
 const port = process.env.PORT || 5000;

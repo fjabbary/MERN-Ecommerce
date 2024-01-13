@@ -22,7 +22,7 @@ export const advancedSearchProducts = createAsyncThunk(
   "products/advancedSearchProducts",
   async (data) => {
     const res = await axios.post(`${url}/advancedSearch`, { data });
-    console.log(res);
+    console.log(res.data);
     return res?.data;
   }
 )

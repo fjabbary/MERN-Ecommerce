@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 const initialState = {
   favorites: [],
+  deletedFavoriteId: '',
   status: null,
   error: null
 }
@@ -12,10 +13,11 @@ const initialState = {
 export const addToFavorite = createAsyncThunk(
   "favorite/addToFavorite",
   async (data) => {
-    toast.info(`Added to the favorite`, {
+
+    const res = await axios.put(`${url}/addToFavorite`, data);
+    toast.info(res.data, {
       position: "bottom-right"
     })
-    const res = await axios.put(`${url}/addToFavorite`, data);
     return res?.data;
   }
 )
@@ -23,11 +25,16 @@ export const addToFavorite = createAsyncThunk(
 export const getFavorites = createAsyncThunk(
   "favorite/getFavorites",
   async (userId) => {
-
     const res = await axios.post(`${url}/getFavorites`, { userId });
-    console.log(res);
-    console.log(userId);
     return res?.data?.favorites;
+  }
+)
+
+export const removeFromFavorite = createAsyncThunk(
+  "favorite/removeFromFavorite",
+  async (data) => {
+    const res = await axios.put(`${url}/deleteFavorite/${data.productId}`, data)
+    return res.data;
   }
 )
 
@@ -44,7 +51,10 @@ const favoriteSlice = createSlice({
       state.favorites = action.payload;
     });
 
-
+    builder.addCase(removeFromFavorite.fulfilled, (state, action) => {
+      state.status = 'fulfilled';
+      state.deletedFavoriteId = action.payload;
+    });
   }
 })
 

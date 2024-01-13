@@ -6,9 +6,12 @@ import ProductCard from "./ProductCard";
 const MyFavorites = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const { favorites } = useSelector((state) => state.favorite);
+  let { favorites } = useSelector((state) => state.favorite);
+  const { deletedFavoriteId } = useSelector((state) => state.favorite);
 
-  console.log(favorites);
+  if (deletedFavoriteId) {
+    window.location.reload();
+  }
 
   useEffect(() => {
     dispatch(getFavorites(auth._id));
@@ -17,7 +20,11 @@ const MyFavorites = () => {
   return (
     <div className="favorite-products">
       {favorites?.map((favorite) => (
-        <ProductCard key={favorite._id} item={favorite} />
+        <ProductCard
+          key={favorite._id}
+          item={favorite}
+          hasRemoveButton={true}
+        />
       ))}
     </div>
   );

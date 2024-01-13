@@ -37,6 +37,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    navigate("/");
     toast.warning("Logged out!", { position: "bottom-right" });
   };
 
@@ -54,40 +55,65 @@ const Navbar = () => {
   return (
     <nav className="navbar-container">
       <div className="nav-bar">
-        <Link to="/" className="logo-container">
-          <img src="/logo.png" alt="" className="logo" />
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+          <div>
+            <Link to="/" className="logo-container">
+              <img src="/logo.png" alt="" className="logo" />
+            </Link>
+          </div>
 
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="search"
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyUp={handleSearchEnter}
-          />
-          <i className="fa fa-search" onClick={handleSearch}></i>
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="search"
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyUp={handleSearchEnter}
+            />
+            <i className="fa fa-search" onClick={handleSearch}></i>
 
-          <span
-            className="adv-search-text"
-            onClick={() => dispatch(toggleSearchDropdown())}
-          >
-            Advanced Search <i className="fa-solid fa-caret-down"></i>
-          </span>
+            <span
+              className="adv-search-text"
+              onClick={() => dispatch(toggleSearchDropdown())}
+            >
+              Advanced Search{" "}
+              {searchDropdownOpen ? (
+                <i className="fa-solid fa-minus"></i>
+              ) : (
+                <i className="fa-solid fa-plus"></i>
+              )}
+            </span>
 
-          {searchDropdownOpen && <AdavncedSearch />}
+            {searchDropdownOpen && <AdavncedSearch />}
+          </div>
         </div>
 
         {isCartOpen && <DropDown />}
 
         <div className="nav-right">
-          {auth._id && <Link to="/my-favorites">My Favorites</Link>}
-          <Link to="/shop-now">Shop Now</Link>
+          {auth._id && (
+            <Link to="/my-favorites">
+              <i className="fa fa-star"></i> My Favorites
+            </Link>
+          )}
+          <Link to="/shop-now">
+            {" "}
+            <i className="fa fa-store"></i> Shop Now
+          </Link>
           {auth._id ? (
-            <Logout onClick={handleLogout}> Logout </Logout>
+            <Logout onClick={handleLogout}>
+              {" "}
+              <i className="fa-solid fa-right-from-bracket"></i> Logout{" "}
+            </Logout>
           ) : (
             <AuthLinks>
-              <Link to="/login"> Login </Link>
-              <Link to="/register"> Register </Link>
+              <Link to="/login">
+                {" "}
+                <i className="fa-solid fa-right-from-bracket"></i> Login{" "}
+              </Link>
+              <Link to="/register">
+                {" "}
+                <i className="fa-solid fa-user-plus"></i> Register{" "}
+              </Link>
             </AuthLinks>
           )}
           <div className="nav-bag" onClick={handleToggle}>

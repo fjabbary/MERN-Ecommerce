@@ -80,7 +80,10 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-                <div className="cart-price">${cartItem.price}</div>
+                <div className="cart-price">
+                  <h3 className="product-price-mobile">Price:</h3> $
+                  {cartItem.price}
+                </div>
                 <div className="cart-qty">
                   <button
                     onClick={() =>
@@ -102,7 +105,8 @@ const Cart = () => {
                   </button>
                 </div>
                 <div className="cart-total">
-                  ${cartItem.quantity * cartItem.price}
+                  <h3 className="product-totalPrice-mobile">Total Price: </h3>$
+                  {cartItem.quantity * cartItem.price}
                 </div>
               </div>
             ))}
@@ -124,7 +128,7 @@ const Cart = () => {
                 <PayButton cartItems={cart.cartItems} />
               ) : (
                 <Link to="/login" className="login-btn">
-                  Login to checkout
+                  <i className="fa fa-lock"></i> Login to checkout
                 </Link>
               )}
 

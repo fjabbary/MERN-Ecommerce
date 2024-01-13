@@ -1,10 +1,11 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { productFetch, clearSelected } from "../features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import ImageGallery from "react-image-gallery";
-import { addToFavorite } from "../features/favoriteSlice";
+import { addToFavorite, getFavorites } from "../features/favoriteSlice";
+import RateProduct from "./RateProduct";
 
 const ProductDetails = () => {
   const { category, id } = useParams();
@@ -21,7 +22,6 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(productFetch(id));
-
     return () => {
       dispatch(clearSelected());
     };
@@ -88,6 +88,8 @@ const ProductDetails = () => {
               </button>
             )}
           </div>
+
+          <RateProduct />
         </div>
       </div>
     </div>

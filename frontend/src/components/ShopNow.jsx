@@ -23,8 +23,8 @@ const Home = () => {
             <h2 className="product-header">{category}</h2>
           </Link>
           <div className="all-categories">
-            {productsData.map((item) =>
-              item.category === category ? (
+            {productsData.map((item, index) =>
+              item.category === category && index % 3 !== 0 ? (
                 <ProductCard item={item} key={item._id} />
               ) : null
             )}

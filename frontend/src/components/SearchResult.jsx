@@ -6,6 +6,10 @@ import { closeSearchDropdown } from "../features/searchSlice";
 const SearchResult = () => {
   const dispatch = useDispatch();
   const { results } = useSelector((state) => state.search.results);
+  const { minPrice, maxPrice, category } = useSelector(
+    (state) => state.search.results
+  );
+  // const results = results.results;
 
   useEffect(() => {
     dispatch(closeSearchDropdown());
@@ -13,9 +17,19 @@ const SearchResult = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
-        {results?.length} Results found
-      </h2>
+      {minPrice && (
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "40px",
+            background: "#ccc",
+            padding: "20px",
+          }}
+        >
+          ({results?.length}) Results found between ${minPrice} and ${maxPrice}{" "}
+          for {category}
+        </h2>
+      )}
       <div className="search-result">
         {results?.map((item) => (
           <ProductCard item={item} key={item._id} category={item.category} />
