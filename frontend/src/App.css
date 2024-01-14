@@ -584,6 +584,26 @@ body {
 }
 
 @media (max-width: 1000px) {
+  .product-rate-container {
+    flex-direction: column;
+  }
+
+  .rate-product {
+    margin-right: 0 !important;
+    transition: all 0.3s;
+  }
+
+  .full-scale {
+    margin-top: 20px;
+  }
+
+  .hide-tablet {
+    display: none !important;
+  }
+
+  .show-tablet {
+    display: block !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -652,6 +672,14 @@ body {
     background-color: #eee;
     padding: 10px 0;
   }
+}
+
+.hide-tablet {
+  display: block;
+}
+
+.show-tablet {
+  display: none;
 }
 
 .login-name {
@@ -767,18 +795,30 @@ input[type="range"] {
 }
 
 .rate-product {
-  margin-top: 40px;
   display: flex;
   width: 160px;
   justify-content: space-between;
+  margin-right: 20px;
 }
 
-.rate-product .btn {
-  padding: 0.5rem 1rem;
-  background-color: #eee;
+.rate-product button {
+  padding: 0.5rem;
+  background-color: #ccc;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 10px;
+  width: 80px;
+  transition: all 0.3s;
+}
+
+.rate-product button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.rate-product button:active {
+  transform: translateY(0px);
 }
 
 .rate-product .btn-liked {
@@ -790,11 +830,20 @@ input[type="range"] {
 }
 
 .rate-number {
-  margin-top: 40px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .full-scale {
-  width: 230px;
+  width: 100%;
   height: 5px;
   background: #aaa;
+}
+
+.product-rate-container {
+  background: #eee;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
 }

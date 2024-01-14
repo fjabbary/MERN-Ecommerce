@@ -27,6 +27,14 @@ const ProductDetails = () => {
     };
   }, [category, id, dispatch]);
 
+  useEffect(() => {
+    document.title = selectedProduct.name;
+
+    return () => {
+      document.title = "Online Shop";
+    };
+  }, [selectedProduct.name]);
+
   const handleAddtoFavorite = (selectedProduct) => {
     const data = { userId: auth._id, favoriteProduct: selectedProduct };
     dispatch(addToFavorite(data));
@@ -89,7 +97,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          <RateProduct />
+          <RateProduct product={selectedProduct} />
         </div>
       </div>
     </div>

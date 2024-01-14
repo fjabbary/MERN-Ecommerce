@@ -106,12 +106,24 @@ app.put('/api/deleteFavorite/:productId', async (req, res) => {
   const { userId } = req.body;
   const productId = req.params.productId;
 
-  console.log(req.body);
-  console.log(productId);
-
   await User.findByIdAndUpdate(userId, { $pull: { favorites: { _id: productId } } }, { new: true })
 
   res.send(productId);
+})
+
+app.put('/api/rateProductLike/:productId', async (req, res) => {
+  const productId = req.params.productId;
+
+  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { likeCount: 1 } }, { new: true }).exec()
+  console.log(response);
+  res.send(response)
+})
+
+app.put('/api/rateProductDislike/:productId', async (req, res) => {
+  const productId = req.params.productId;
+
+  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { dislikeCount: 1 } }, { new: true }).exec()
+  res.send(response)
 })
 
 const port = process.env.PORT || 5000;

@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 import SearchResult from './components/SearchResult';
 import CheckoutSuccess from './components/CheckoutSuccess';
 import MyFavorites from './components/MyFavorites';
+import Footer from './components/Footer';
 
 const App = () => {
   return (

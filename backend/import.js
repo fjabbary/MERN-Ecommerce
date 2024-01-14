@@ -16,8 +16,6 @@ mongoose.connect(process.env.DB_URI)
 
 const products = JSON.parse(fs.readFileSync(`${__dirname}/products.json`, 'utf-8'))
 
-
-
 const importData = async () => {
   try {
     await Product.create(products, { validateBeforeSave: false })

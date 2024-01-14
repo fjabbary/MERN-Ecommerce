@@ -11,7 +11,9 @@ const productSchema = new mongoose.Schema({
     required: false
   },
   price: Number,
-  category: String
+  category: String,
+  likeCount: Number,
+  dislikeCount: Number
 })
 
 const Product = mongoose.model('Product', productSchema)
