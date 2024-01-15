@@ -34,6 +34,7 @@ const App = () => {
         <Route path="/shop-now/:category/:id" element={<ProductDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
 
   );

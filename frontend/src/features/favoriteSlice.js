@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const initialState = {
   favorites: [],
-  deletedFavoriteId: '',
+  // deletedFavoriteId: '',
   status: null,
   error: null
 }
@@ -34,7 +34,8 @@ export const removeFromFavorite = createAsyncThunk(
   "favorite/removeFromFavorite",
   async (data) => {
     const res = await axios.put(`${url}/deleteFavorite/${data.productId}`, data)
-    return res.data;
+    console.log(res.data);
+    return res.data
   }
 )
 
@@ -53,7 +54,7 @@ const favoriteSlice = createSlice({
 
     builder.addCase(removeFromFavorite.fulfilled, (state, action) => {
       state.status = 'fulfilled';
-      state.deletedFavoriteId = action.payload;
+      state.favorites = state.favorites.filter(item => item._id !== action.payload);
     });
   }
 })

@@ -7,11 +7,6 @@ const MyFavorites = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   let { favorites } = useSelector((state) => state.favorite);
-  const { deletedFavoriteId } = useSelector((state) => state.favorite);
-
-  if (deletedFavoriteId) {
-    window.location.reload();
-  }
 
   useEffect(() => {
     dispatch(getFavorites(auth._id));
@@ -19,13 +14,17 @@ const MyFavorites = () => {
 
   return (
     <div className="favorite-products">
-      {favorites?.map((favorite) => (
-        <ProductCard
-          key={favorite._id}
-          item={favorite}
-          hasRemoveButton={true}
-        />
-      ))}
+      {favorites.length > 0 ? (
+        favorites?.map((favorite) => (
+          <ProductCard
+            key={favorite._id}
+            item={favorite}
+            hasRemoveButton={true}
+          />
+        ))
+      ) : (
+        <h2 className="no-favorite">There is no item in your favorites</h2>
+      )}
     </div>
   );
 };

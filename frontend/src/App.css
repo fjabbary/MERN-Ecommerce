@@ -10,6 +10,7 @@
 body {
   font-family: "Nunito Sans", sans-serif;
   font-family: "Roboto", sans-serif;
+  padding-bottom: 100px;
 }
 :root {
   --purple: rgb(110, 34, 182);
@@ -390,7 +391,7 @@ body {
 .all-categories {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
 .product-header {
   background-color: #eee;
@@ -442,7 +443,7 @@ body {
 .product-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
 
 .breadcrumb {
@@ -761,7 +762,7 @@ input[type="range"] {
 .favorite-products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
 
 .fa-trash {
@@ -846,4 +847,35 @@ input[type="range"] {
   margin-top: 20px;
   display: flex;
   align-items: center;
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  margin-top: 60px;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.no-favorite {
+  margin-top: 100px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-facebook-f {
+  background: #4267b2;
+  color: #fff;
+}
+
+.footer-right a {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
 }

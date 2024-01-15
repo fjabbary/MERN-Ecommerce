@@ -31,9 +31,11 @@ const SearchResult = () => {
         </h2>
       )}
       <div className="search-result">
-        {results?.map((item) => (
-          <ProductCard item={item} key={item._id} category={item.category} />
-        ))}
+        {[...results]
+          ?.sort((a, b) => a.price - b.price)
+          .map((item) => (
+            <ProductCard item={item} key={item._id} category={item.category} />
+          ))}
       </div>
     </div>
   );
