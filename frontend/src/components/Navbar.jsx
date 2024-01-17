@@ -16,6 +16,7 @@ import { toggleSearchDropdown } from "../features/searchSlice";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
+  const [searchErrBorder, setSearchErrBorder] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,7 +33,9 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(calcCartTotalQuantity());
-    // dispatch(getUser(auth._id));
+    if (auth._id) {
+      dispatch(getUser(auth._id));
+    }
   }, [dispatch, auth._id]);
 
   const handleLogout = () => {
@@ -42,8 +45,15 @@ const Navbar = () => {
   };
 
   const handleSearch = () => {
-    dispatch(searchProducts(query));
-    navigate("/search-result");
+    if (query) {
+      dispatch(searchProducts(query));
+      setSearchErrBorder(false);
+      navigate("/search-result");
+    }
+
+    if (!query) {
+      setSearchErrBorder(true);
+    }
   };
 
   const handleSearchEnter = (e) => {
@@ -68,6 +78,7 @@ const Navbar = () => {
               placeholder="search"
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={handleSearchEnter}
+              className={`${searchErrBorder ? "err-msg" : ""} `}
             />
             <i className="fa fa-search" onClick={handleSearch}></i>
 
@@ -100,20 +111,31 @@ const Navbar = () => {
             <i className="fa fa-store"></i> Shop Now
           </Link>
           {auth._id ? (
-            <Logout onClick={handleLogout}>
-              {" "}
-              <i className="fa-solid fa-right-from-bracket"></i> Logout{" "}
-            </Logout>
+            <>
+              <Logout onClick={handleLogout}>
+                {" "}
+                <i className="fa-solid fa-right-from-bracket"></i> Logout{" "}
+              </Logout>
+
+              <Link>
+                Hello{" "}
+                <span className="loggedin-name">
+                  {auth.user?.name.split(" ")[0]}
+                </span>
+              </Link>
+            </>
           ) : (
             <AuthLinks>
-              <Link to="/login">
-                {" "}
-                <i className="fa-solid fa-right-from-bracket"></i> Login{" "}
-              </Link>
-              <Link to="/register">
-                {" "}
-                <i className="fa-solid fa-user-plus"></i> Register{" "}
-              </Link>
+              <div className="auth-links">
+                <Link to="/login">
+                  {" "}
+                  <i className="fa-solid fa-right-from-bracket"></i> Login{" "}
+                </Link>
+                <Link to="/register">
+                  {" "}
+                  <i className="fa-solid fa-user-plus"></i> Sign Up{" "}
+                </Link>
+              </div>
             </AuthLinks>
           )}
           <div className="nav-bag" onClick={handleToggle}>

@@ -15,8 +15,26 @@ import SearchResult from './components/SearchResult';
 import CheckoutSuccess from './components/CheckoutSuccess';
 import MyFavorites from './components/MyFavorites';
 import Footer from './components/Footer';
+import useIdleLogout from './components/useIdleLogout';
+import { logoutUser } from './features/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { token } = useSelector(state => state.auth)
+
+  const handleLogout = () => {
+    if (token) {
+      dispatch(logoutUser());
+      alert('Logged out');
+    }
+  };
+
+  const resetIdleTimer = useIdleLogout(5 * 60 * 1000, handleLogout);
+
+
   return (
     <BrowserRouter>
       <ToastContainer />

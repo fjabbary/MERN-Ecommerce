@@ -14,7 +14,8 @@ export const searchProducts = createAsyncThunk(
   "products/productsSearch",
   async (query) => {
     const res = await axios.get(`${url}/search/${query}`);
-    return res?.data;
+    localStorage.setItem("results", JSON.stringify(res?.data.searchResults));
+    return res?.data.searchResults;
   }
 )
 
@@ -22,8 +23,8 @@ export const advancedSearchProducts = createAsyncThunk(
   "products/advancedSearchProducts",
   async (data) => {
     const res = await axios.post(`${url}/advancedSearch`, { data });
-    console.log(res.data);
-    return res?.data;
+    localStorage.setItem("results", JSON.stringify(res.data.results));
+    return res?.data.results;
   }
 )
 
@@ -31,13 +32,31 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    toggleSearchDropdown: (state, action) => {
+    toggleSearchDropdown(state, action) {
       state.searchDropdownOpen = !state.searchDropdownOpen;
     },
-    closeSearchDropdown: (state, action) => {
+    closeSearchDropdown(state, action) {
       state.searchDropdownOpen = false;
+    },
+    sortSearchResult(state, action) {
+
+      if (action.payload === 'decrement') {
+        state.results.sort((a, b) => a.name > b.name ? -1 : null);
+      } else if (action.payload === 'increment') {
+        state.results.sort((a, b) => a.name < b.name ? -1 : null);
+      } else if (action.payload === 'asc-price') {
+        state.results.sort((a, b) => a.price < b.price ? -1 : null);
+      } else if (action.payload === 'desc-price') {
+        state.results.sort((a, b) => a.price > b.price ? -1 : null);
+      }
+
+    },
+
+    clearSearchResult(state, action) {
+      state.results = []
     }
   },
+
   extraReducers: builder => {
     builder.addCase(searchProducts.pending, state => {
       state.status = 'pending';
@@ -62,5 +81,5 @@ const searchSlice = createSlice({
   }
 })
 
-export const { toggleSearchDropdown, closeSearchDropdown } = searchSlice.actions;
+export const { toggleSearchDropdown, closeSearchDropdown, sortSearchResult, clearSearchResult } = searchSlice.actions;
 export default searchSlice.reducer;

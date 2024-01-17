@@ -1,22 +1,49 @@
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
 import { useEffect } from "react";
-import { closeSearchDropdown } from "../features/searchSlice";
+import {
+  closeSearchDropdown,
+  sortSearchResult,
+  clearSearchResult,
+} from "../features/searchSlice";
 
 const SearchResult = () => {
   const dispatch = useDispatch();
-  const { results } = useSelector((state) => state.search.results);
+  let results = JSON.parse(localStorage.getItem("results"));
+
   const { minPrice, maxPrice, category } = useSelector(
     (state) => state.search.results
   );
-  // const results = results.results;
 
   useEffect(() => {
     dispatch(closeSearchDropdown());
+
+    return () => {
+      dispatch(clearSearchResult());
+    };
   }, [dispatch]);
+
+  useEffect(() => {
+    JSON.parse(localStorage.getItem("results"));
+  }, []);
+
+  const handleSortSearchResult = (e) => {
+    dispatch(sortSearchResult(e.target.value));
+  };
 
   return (
     <div>
+      {results.length && (
+        <div className="sort-dropdown-container">
+          <select className="sort-dropdown" onChange={handleSortSearchResult}>
+            <option value="0">Sort By:</option>
+            <option value="increment">A-Z</option>
+            <option value="decrement">Z-A</option>
+            <option value="asc-price">Price (Low to High)</option>
+            <option value="desc-price">Price (High to Low)</option>
+          </select>
+        </div>
+      )}
       {minPrice && (
         <h2
           style={{
@@ -31,11 +58,12 @@ const SearchResult = () => {
         </h2>
       )}
       <div className="search-result">
-        {[...results]
-          ?.sort((a, b) => a.price - b.price)
-          .map((item) => (
-            <ProductCard item={item} key={item._id} category={item.category} />
-          ))}
+        {results?.length === 0 && (
+          <h2 className="no-search-result">No results found!</h2>
+        )}
+        {results?.map((item) => (
+          <ProductCard item={item} key={item._id} category={item.category} />
+        ))}
       </div>
     </div>
   );

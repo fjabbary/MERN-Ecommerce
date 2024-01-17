@@ -56,7 +56,7 @@ app.get("/api/search/:query", async (req, res) => {
 
   res.send({
     numOfResults: nameOrDescMatch.length,
-    results: nameOrDescMatch
+    searchResults: nameOrDescMatch
   });
 })
 
@@ -111,18 +111,24 @@ app.put('/api/deleteFavorite/:productId', async (req, res) => {
   res.send(productId);
 })
 
-app.put('/api/rateProductLike/:productId', async (req, res) => {
+app.put('/api/rateProductLike/:productId/:dir', async (req, res) => {
   const productId = req.params.productId;
+  const direction = req.params.dir;
+  let step;
+  direction === 'inc' ? step = 1 : step = -1;
 
-  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { likeCount: 1 } }, { new: true }).exec()
-  console.log(response);
+
+  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { likeCount: step } }, { new: true }).exec()
   res.send(response)
 })
 
-app.put('/api/rateProductDislike/:productId', async (req, res) => {
+app.put('/api/rateProductDislike/:productId/:dir', async (req, res) => {
   const productId = req.params.productId;
+  const direction = req.params.dir;
+  let step;
+  direction === 'inc' ? step = 1 : step = -1;
 
-  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { dislikeCount: 1 } }, { new: true }).exec()
+  const response = await Product.findByIdAndUpdate({ _id: productId }, { $inc: { dislikeCount: step } }, { new: true }).exec()
   res.send(response)
 })
 

@@ -4,16 +4,12 @@ import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  // const { data } = useGetAllProductsQuery();
   const { products } = useSelector((state) => state.products);
 
   const productsData = [...products];
 
   const categories = productsData.map((item) => item.category);
   const uniqueCategories = [...new Set(categories)];
-
-  console.log(uniqueCategories);
-  console.log(productsData);
 
   return (
     <div className="all-categories-container">

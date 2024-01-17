@@ -3,27 +3,27 @@ import axios from "axios";
 import { url } from './api';
 
 const initialState = {
-  likes: localStorage.getItem('likeRate') ? Number(localStorage.getItem('likeRate')) : 0,
-  dislikes: localStorage.getItem('dislikeRate') ? Number(localStorage.getItem('dislikeRate')) : 0
+  likes: null,
+  dislikes: null
 }
 
 export const rateLike = createAsyncThunk(
   "rate/rateIncrease",
-  async (productId) => {
+  async (data) => {
+    const { _id, direction } = data
 
-    const res = await axios.put(`${url}/rateProductLike/${productId}`);
+    const res = await axios.put(`${url}/rateProductLike/${_id}/${direction}`);
 
-    console.log(res.data.likeCount);
     return res?.data.likeCount;
   }
 )
 
 export const rateDislike = createAsyncThunk(
   "rate/rateDecrease",
-  async (productId) => {
+  async (data) => {
+    const { _id, direction } = data
 
-    const res = await axios.put(`${url}/rateProductDislike/${productId}`);
-    console.log(res);
+    const res = await axios.put(`${url}/rateProductDislike/${_id}/${direction}`);
     return res?.data.dislikeCount;
   }
 )
@@ -32,17 +32,18 @@ export const rateDislike = createAsyncThunk(
 const rateSlice = createSlice({
   name: "rate",
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
 
     builder.addCase(rateLike.fulfilled, (state, action) => {
       state.status = 'fulfilled';
-      state.likes += 1;
+      state.likes = action.payload;
     });
 
     builder.addCase(rateDislike.fulfilled, (state, action) => {
       state.status = 'fulfilled';
-      state.dislikes += 1;
+      state.dislikes = action.payload;
     });
 
   },

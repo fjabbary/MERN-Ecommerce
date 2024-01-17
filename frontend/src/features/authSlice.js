@@ -32,7 +32,6 @@ export const registerUser = createAsyncThunk(
       return token.data;
 
     } catch (err) {
-      console.log(err.response.data);
       return rejectWithValue(err.response.data)
     }
   }
@@ -53,7 +52,6 @@ export const loginUser = createAsyncThunk(
       return token.data;
 
     } catch (err) {
-      console.log(err.response.data);
       return rejectWithValue(err.response.data)
     }
   }
