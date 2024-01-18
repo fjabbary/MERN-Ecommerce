@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   closeSearchDropdown,
   sortSearchResult,
@@ -10,6 +10,7 @@ import {
 const SearchResult = () => {
   const dispatch = useDispatch();
   const { results } = useSelector((state) => state.search);
+  const selectTagRef = useRef();
 
   const { minPrice, maxPrice, category } = useSelector(
     (state) => state.search.results
@@ -23,6 +24,12 @@ const SearchResult = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (selectTagRef.current) {
+      selectTagRef.current.value = 0;
+    }
+  }, [results.length]);
+
   const handleSortSearchResult = (e) => {
     dispatch(sortSearchResult(e.target.value));
   };
@@ -31,7 +38,11 @@ const SearchResult = () => {
     <div>
       {results.length && (
         <div className="sort-dropdown-container">
-          <select className="sort-dropdown" onChange={handleSortSearchResult}>
+          <select
+            className="sort-dropdown"
+            onChange={handleSortSearchResult}
+            ref={selectTagRef}
+          >
             <option value="0">Sort By:</option>
             <option value="increment">A-Z</option>
             <option value="decrement">Z-A</option>
