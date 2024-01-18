@@ -9,7 +9,7 @@ import {
 
 const SearchResult = () => {
   const dispatch = useDispatch();
-  let results = JSON.parse(localStorage.getItem("results"));
+  const { results } = useSelector((state) => state.search);
 
   const { minPrice, maxPrice, category } = useSelector(
     (state) => state.search.results
@@ -22,10 +22,6 @@ const SearchResult = () => {
       dispatch(clearSearchResult());
     };
   }, [dispatch]);
-
-  useEffect(() => {
-    JSON.parse(localStorage.getItem("results"));
-  }, []);
 
   const handleSortSearchResult = (e) => {
     dispatch(sortSearchResult(e.target.value));

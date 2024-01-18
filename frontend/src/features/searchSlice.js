@@ -14,7 +14,6 @@ export const searchProducts = createAsyncThunk(
   "products/productsSearch",
   async (query) => {
     const res = await axios.get(`${url}/search/${query}`);
-    localStorage.setItem("results", JSON.stringify(res?.data.searchResults));
     return res?.data.searchResults;
   }
 )
@@ -23,7 +22,6 @@ export const advancedSearchProducts = createAsyncThunk(
   "products/advancedSearchProducts",
   async (data) => {
     const res = await axios.post(`${url}/advancedSearch`, { data });
-    localStorage.setItem("results", JSON.stringify(res.data.results));
     return res?.data.results;
   }
 )
