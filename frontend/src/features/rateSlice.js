@@ -4,7 +4,8 @@ import { url } from './api';
 
 const initialState = {
   likes: null,
-  dislikes: null
+  dislikes: null,
+  comments: []
 }
 
 export const rateLike = createAsyncThunk(
@@ -28,6 +29,14 @@ export const rateDislike = createAsyncThunk(
   }
 )
 
+export const addComment = createAsyncThunk(
+  "rate/AddComment",
+  async (data) => {
+    const res = await axios.post(`${url}/addComment`, data)
+    return res.data;
+  }
+)
+
 
 const rateSlice = createSlice({
   name: "rate",
@@ -44,6 +53,11 @@ const rateSlice = createSlice({
     builder.addCase(rateDislike.fulfilled, (state, action) => {
       state.status = 'fulfilled';
       state.dislikes = action.payload;
+    });
+
+    builder.addCase(addComment.fulfilled, (state, action) => {
+      state.status = 'fulfilled';
+      state.comments = action.payload;
     });
 
   },

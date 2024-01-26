@@ -6,6 +6,7 @@ import { addToCart, calcCartTotalQuantity } from "../features/cartSlice";
 import ImageGallery from "react-image-gallery";
 import { addToFavorite, getFavorites } from "../features/favoriteSlice";
 import RateProduct from "./RateProduct";
+import Comment from "./Comment";
 
 const ProductDetails = () => {
   const { category, id } = useParams();
@@ -100,6 +101,11 @@ const ProductDetails = () => {
           <RateProduct product={selectedProduct} />
         </div>
       </div>
+      <Comment
+        comments={selectedProduct.comments}
+        productId={selectedProduct._id}
+        auth={auth}
+      />
     </div>
   );
 };

@@ -132,6 +132,21 @@ app.put('/api/rateProductDislike/:productId/:dir', async (req, res) => {
   res.send(response)
 })
 
+
+app.post('/api/addComment', async (req, res) => {
+  const { headline, feedback, productId } = req.body;
+  const name = req.body.auth.user.name;
+  const newComment = {
+    headline,
+    feedback,
+    name
+  }
+  const response = await Product.findByIdAndUpdate({ _id: productId }, { $push: { comments: newComment } })
+
+  res.send([...response.comments, newComment])
+})
+
+
 const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;
 

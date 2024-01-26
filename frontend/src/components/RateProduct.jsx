@@ -125,7 +125,7 @@ const RateProduct = ({ product }) => {
             className="empty-scale"
             style={{
               backgroundColor: "rgb(110, 34, 182)",
-              width: percentageWidth + "px",
+              maxWidth: percentageWidth + "px",
               height: "5px",
             }}
           ></div>

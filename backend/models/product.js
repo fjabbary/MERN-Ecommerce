@@ -13,7 +13,8 @@ const productSchema = new mongoose.Schema({
   price: Number,
   category: String,
   likeCount: Number,
-  dislikeCount: Number
+  dislikeCount: Number,
+  comments: [Object]
 })
 
 const Product = mongoose.model('Product', productSchema)
