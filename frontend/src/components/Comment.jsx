@@ -61,7 +61,7 @@ const Comment = ({ comments, productId, auth }) => {
         {comments?.map((comment, index) => (
           <div className="comment" key={index}>
             <p>
-              <i className="fa fa-user-tie"></i> {comment.name.split(" ")[0]}{" "}
+              <i className="fa fa-user-tie"></i> {comment.name?.split(" ")[0]}{" "}
               says:
             </p>
             <br />
