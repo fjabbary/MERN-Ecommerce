@@ -8,7 +8,7 @@ const initialState = {
 export const categoriesFetch = createAsyncThunk(
   "categories/productsFetch",
   async () => {
-    const res = await axios.get("http://localhost:5000/categories");
+    const res = await axios.get("https://mern-ecommerce-be.vercel.app/categories");
     return res?.data;
   }
 );
