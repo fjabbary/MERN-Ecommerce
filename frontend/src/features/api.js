@@ -1,1 +1,1 @@
-export const url = 'http://localhost:5000/api';
+export const url = 'https://mern-ecommerce-be.vercel.app/api';
