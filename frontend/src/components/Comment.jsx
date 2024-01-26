@@ -21,7 +21,7 @@ const Comment = ({ comments, productId, auth }) => {
 
   return (
     <div className="comment-container">
-      {auth._id ? (
+      {!auth._id ? (
         <p className="feedback-message">Login to add your feedback</p>
       ) : null}
       {auth._id && (
